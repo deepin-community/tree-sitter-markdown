@@ -1,15 +1,80 @@
-Source: template-repository
-Section: unknown
+Source: tree-sitter-markdown
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Tree-sitter Team <team+tree-sitter@tracker.debian.org>
+Uploaders:
+ James McCoy <jamessan@debian.org>,
+Build-Depends:
+ cargo:native,
+ debhelper-compat (= 13),
+ dh-sequence-rust,
+ librust-cc-1+default-dev (>= 1.0.89),
+ librust-tree-sitter-0+default-dev (>= 0.21),
+ nodejs,
+ rustc:native,
+ tree-sitter-cli (>= 0.22),
+Standards-Version: 4.7.2
+Section: libs
+Homepage: https://github.com/tree-sitter-grammars/tree-sitter-markdown/
+Rules-Requires-Root: no
+Vcs-Git: https://salsa.debian.org/tree-sitter-team/tree-sitter-markdown.git
+Vcs-Browser: https://salsa.debian.org/tree-sitter-team/tree-sitter-markdown
 
-Package: template-repository
+Package: tree-sitter-markdown-src
+Architecture: all
+Depends:
+ ${misc:Depends},
+ gcc,
+ libc6-dev | libc-dev,
+ libtree-sitter-dev (>= 0.21),
+ make,
+ pkgconf,
+Description: markdown parser for Tree-sitter (source files)
+ This package contains the generated source files for building the markdown
+ parser shared object.
+
+Package: tree-sitter-markdown-inline-src
+Architecture: all
+Depends:
+ ${misc:Depends},
+ gcc,
+ libc6-dev | libc-dev,
+ libtree-sitter-dev (>= 0.21),
+ make,
+ pkgconf,
+Description: inline markdown parser for Tree-sitter (source files)
+ This package contains the generated source files for building the inline
+ markdown parser shared object.
+
+Package: librust-tree-sitter-md-dev
+Section: rust
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Multi-Arch: same
+Depends:
+ librust-cc-1+default-dev (>= 1.0.89),
+ librust-tree-sitter-0+default-dev (>= 0.21),
+ ${misc:Depends},
+Provides:
+ librust-tree-sitter-md+default-dev (= ${binary:Version}),
+ librust-tree-sitter-md-0-dev (= ${binary:Version}),
+ librust-tree-sitter-md-0+default-dev (= ${binary:Version}),
+ librust-tree-sitter-md-0.2-dev (= ${binary:Version}),
+ librust-tree-sitter-md-0.2+default-dev (= ${binary:Version}),
+ librust-tree-sitter-md-0.2.3-dev (= ${binary:Version}),
+ librust-tree-sitter-md-0.2.3+default-dev (= ${binary:Version}),
+Description: Markdown grammar for the tree-sitter parser - Rust source code
+ tree-sitter-md is a tree-sitter grammar for Markdown, implementing the
+ CommonMark Spec and (optionally) some of its extensions.
+ .
+   * GitHub flavored markdown - Default
+   * Task lists - Default
+   * Strikethrough - Default
+   * Pipe tables - Default
+   * YAML metadata - Default
+   * TOML metadata - Default
+   * Tags - Enabled at compile time
+   * Wiki Link - Enabled at compile time
+ .
+ Tree-sitter is a parser generator and incremental parsing library.
+ .
+ This package contains the source for the Rust tree-sitter-md crate,
+ packaged for use with cargo.

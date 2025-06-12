@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/tree-sitter/lib"
+
+for dir in /usr/src/tree-sitter/markdown/*; do
+	ver=$(basename "$dir")
+	rm -f "$CACHE_DIR"/markdown.so
+
+	printf 'Testing Markdown parser, version %s\n' "$ver"
+	make -f "${dir}/Makefile" OBJ_DIR="$CACHE_DIR"
+	ALL_EXTENSIONS=1 tree-sitter test
+done

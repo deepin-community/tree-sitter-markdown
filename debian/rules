@@ -1,4 +1,34 @@
 #!/usr/bin/make -f
 
+include /usr/share/dpkg/pkg-info.mk
+
+export DEB_VERSION_UPSTREAM
+export TREE_SITTER_SRC_DIR_MARKDOWN = /usr/src/tree-sitter/markdown/${DEB_VERSION_UPSTREAM}/
+export TREE_SITTER_SRC_DIR_MARKDOWN_INLINE = /usr/src/tree-sitter/markdown_inline/${DEB_VERSION_UPSTREAM}/
+export ALL_EXTENSIONS=1
+
 %:
 	dh $@
+
+debian/%/Makefile: debian/Makefile.in
+	mkdir -p debian/$*
+	sed -e "s/@PARSER_NAME@/$*/" -e "s/@PARSER_VER@/$(DEB_VERSION_UPSTREAM)/g" $< > $@
+
+override_dh_auto_clean:
+
+override_dh_auto_build:
+	cd tree-sitter-markdown && tree-sitter generate --no-bindings
+	cd tree-sitter-markdown-inline && tree-sitter generate --no-bindings
+	dh_auto_build --buildsystem=rust
+
+# Do not run Makefile install
+override_dh_auto_install:
+	dh_auto_install --buildsystem=rust
+
+override_dh_install: debian/markdown/Makefile debian/markdown_inline/Makefile
+	dh_install
+
+override_dh_auto_test:
+	cd tree-sitter-markdown && XDG_CACHE_HOME=$(CURDIR)/debian/.cache tree-sitter test
+	cd tree-sitter-markdown-inline && XDG_CACHE_HOME=$(CURDIR)/debian/.cache tree-sitter test
+	dh_auto_test --buildsystem=rust
