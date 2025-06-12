@@ -1,0 +1,11 @@
+debian/.cache/
+debian/markdown/
+debian/markdown_inline/
+tree-sitter-markdown/src/grammar.json
+tree-sitter-markdown/src/keywords.h
+tree-sitter-markdown/src/parser.c
+tree-sitter-markdown/src/node-types.json
+tree-sitter-markdown-inline/src/grammar.json
+tree-sitter-markdown-inline/src/keywords.h
+tree-sitter-markdown-inline/src/parser.c
+tree-sitter-markdown-inline/src/node-types.json

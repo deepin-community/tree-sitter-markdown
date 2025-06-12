@@ -1,0 +1,4 @@
+debian/markdown_inline/Makefile ${env:TREE_SITTER_SRC_DIR_MARKDOWN_INLINE}/
+tree-sitter-markdown-inline/src/parser.c ${env:TREE_SITTER_SRC_DIR_MARKDOWN_INLINE}/parser/src/
+tree-sitter-markdown-inline/src/scanner.c ${env:TREE_SITTER_SRC_DIR_MARKDOWN_INLINE}/parser/src/
+tree-sitter-markdown-inline/src/tree_sitter/*.h ${env:TREE_SITTER_SRC_DIR_MARKDOWN_INLINE}/parser/src/tree_sitter/

@@ -1,5 +1,21 @@
-template-repository (1.0-1) unstable; urgency=medium
+tree-sitter-markdown (0.2.3-3) unstable; urgency=medium
 
-  * Initial release
+  * Add libc-dev and make to tree-sitter-*-src Depends
+  * Add cargo and rustc explicitly to Build-Depends
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- James McCoy <jamessan@debian.org>  Sun, 16 Mar 2025 22:20:49 -0400
+
+tree-sitter-markdown (0.2.3-2) unstable; urgency=medium
+
+  * Upload to unstable
+  * Declare compliance with Policy 4.7.2, no changes needed
+  * Add salsa-ci config
+  * copyright: Fix paths for tree_sitter headers
+
+ -- James McCoy <jamessan@debian.org>  Sat, 08 Mar 2025 14:11:40 -0500
+
+tree-sitter-markdown (0.2.3-1) experimental; urgency=medium
+
+  * Initial debianization. (Closes: #1072003)
+
+ -- James McCoy <jamessan@debian.org>  Thu, 26 Dec 2024 17:05:47 -0500
